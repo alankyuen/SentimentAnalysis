@@ -1,0 +1,15 @@
+{
+        "NEGTOOL_NEGSCOPE": "reviews/negtool_negscope/small10000_cleaned_neg_scopes.txt",
+
+        "VALENCE_DICT": "dictionaries/main_valence_dictionary.json",
+
+        "MEANING_SPEC_DISTRIBUTION_DICT_PATH" : "dictionaries/valenceToMeaningSpec.json",
+
+        "MEANING_SPEC_FREQ_PATH" : "dictionaries/freq_sentionly_posturop.json",
+
+        "MEANING_SPEC_DP_PATH" : "dictionaries/dp_sentionly_posturop.json",
+
+        "REVIEWS_PATH" : "reviews/small_10000_test_file_full_nt_fixed_rerun.json",
+
+        "MODELS_LIST": "models.txt"
+}
