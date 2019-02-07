@@ -25,6 +25,7 @@ if __name__ == "__main__":
 	parser.add_argument('-sentence_offset', type=int, default = 0)
 	parser.add_argument('-corenlp_server_port', type=str, default = "9000")
 	parser.add_argument('-save_path', type=str, default = "results")
+	parser.add_argument('-sentiment_precision', type=int, 	default = 4, help="number of decimals for sentiment value")
 
 	args = parser.parse_args()
 	config = json.load(open(args.config_path, "r"))
@@ -86,7 +87,7 @@ if __name__ == "__main__":
 					pipeline.neg_resolution()
 					
 					#get sentiment results and save it in the list
-					sentiment_result = pipeline.compose()#round(pipeline.compose(),5)
+					sentiment_result = round(pipeline.compose(),args.sentiment_precision)#round(pipeline.compose(),5)
 					model_id = models_dict[model_name]
 					sentiment_results[model_id] = sentiment_result
 
