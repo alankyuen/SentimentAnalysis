@@ -126,7 +126,7 @@ class pipeline():
 							"dist":self.distribution_dict,
 							"freq":self.freq_dict,
 							"dp":self.dp_dict }
-
+		self.stopwords = [sw.rstrip("\n") for sw in open(config["STOPWORDS_PATH"], 'r').readlines()]
 		#parameter for the window negscope method
 		self.negscope_window_size = 4
 
@@ -183,7 +183,7 @@ class pipeline():
 
 			for i in range(self.review.size):
 				self.review.list_tokenized_1D[i] = find_and_convert_bigrams2(self.review.list_tokenized_1D[i], self.valence_dict)
-				list_negscopes.append(resolve_double_negative(detect_neg_scope_window(self.review.list_tokenized_1D[i], self.negscope_window_size)))
+				list_negscopes.append(resolve_double_negative(detect_neg_scope_window(self.review.list_tokenized_1D[i], self.negscope_window_size, self.stopwords)))
 
 				#convert 1D tokens into affirmative valence [AKY 7/24 - SAVE for RESET]
 				valence_1D = [getValence(word, self.valence_dict) for word in self.review.list_tokenized_1D[i]]
@@ -242,7 +242,7 @@ class pipeline():
 				#flatten new token_trees into 1D
 				self.review.list_tokenized_1D[i] = get_1D_tokens_from_tree(self.review.list_token_trees[i])
 				#perform window negscope with double negative resolution
-				negscope = resolve_double_negative(detect_neg_scope_window(self.review.list_tokenized_1D[i], self.negscope_window_size)) 
+				negscope = resolve_double_negative(detect_neg_scope_window(self.review.list_tokenized_1D[i], self.negscope_window_size, self.stopwords)) 
 				#convert 1D negscopes to tree indice negscopes
 				list_negscopes.append(SequenceToTreeIndices(self.review.list_tree_indices[i], negscope))
 

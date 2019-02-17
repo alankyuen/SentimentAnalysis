@@ -346,14 +346,13 @@ def detect_neg_scope_tree(subtree, parent_index = []):
 	return neg_scope
 
 
-def detect_neg_scope_window(sentence_sequence, window_size = 0):
+def detect_neg_scope_window(sentence_sequence, window_size = 0, stopwords = [sw.rstrip("\n") for sw in open("dictionaries/stopwords.txt").readlines()]):
 
 	''' takes tokens_1D and labels the proceeding window_size number of tokens as negated
 		there is a heuristic recursive way of dealing with double negatives
 		returns a 1D list of 1D indices
 	'''
-
-	stopwords = ["the", "a", "of", "in"]
+	
 	neg_scope = []
 	num_scopes = 0
 	last_scope_count = 0
